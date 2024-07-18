@@ -1,0 +1,13 @@
+# config.yaml
+
+# Caminho para diretório de entrada de amostras
+#samples_dir: "samples/"
+
+# fastq files
+input:
+   fastq: samples/
+
+# Caminho para diretório de saída
+output_dir: "data/"
+
+

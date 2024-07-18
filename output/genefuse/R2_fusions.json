@@ -1,0 +1,7 @@
+{
+	"command":"genefuse --read1 samples/R1.fastq --fusion reference_genome/cancer.hg38.csv --ref reference_genome/hg38.fa --html output/genefuse/R2_genefuse_report.html --json output/genefuse/R2_fusions.json ",
+	"version":"0.8.0",
+	"time":"2024-07-16      17:14:13",
+	"fusions":{
+	}
+}

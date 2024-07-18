@@ -1,0 +1,22 @@
+<html><head><meta http-equiv="content-type" content="text/html;charset=utf-8" /><title>GeneFuse 0.8.0, at 2024-07-16      17:14:13</title><script type="text/javascript">
+function toggle(targetid){ 
+                if (document.getElementById){ 
+                    target=document.getElementById(targetid); 
+                        if (target.style.display=='table-row'){ 
+                            target.style.display='none'; 
+                        } else { 
+                            target.style.display='table-row'; 
+                        } 
+                } 
+            }function toggle_target_list(targetid){ 
+                if (document.getElementById){ 
+                    target=document.getElementById(targetid); 
+                        if (target.style.display=='block'){ 
+                            target.style.display='none'; 
+                            document.getElementById('target_view_btn').value='view';
+                        } else { 
+                            document.getElementById('target_view_btn').value='hide';
+                            target.style.display='block'; 
+                        } 
+                } 
+            }</script><style type="text/css">td {border:1px solid #dddddd;padding-left:2px;padding-right:2px;font-size:10px;}table {border:1px solid #999999;padding:2x;border-collapse:collapse;}img {padding:30px;}.alignleft {text-align:left;}.alignright {text-align:right;}.software {font-weight:bold;font-size:24px;padding:5px;}.header {color:#ffffff;padding:1px;height:20px;background:#000000;}.figuretitle {color:#996657;font-size:20px;padding:50px;}#container {text-align:center;padding:1px;font-family:Arail,'Liberation Mono', Menlo, Courier, monospace;}#menu {padding-top:10px;padding-bottom:10px;text-align:left;}#menu a {color:#0366d6; font-size:18px;font-weight:600;line-height:28px;text-decoration:none;font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'}a:visited {color: #999999}.menu_item {text-align:left;padding-top:5px;font-size:18px;}.highlight {text-align:left;padding-top:30px;padding-bottom:30px;font-size:20px;line-height:35px;}.fusion_head {text-align:left;color:#0092FF;font-family:Arial;padding-top:20px;padding-bottom:5px;}.fusion_block {}.match_brief {font-size:8px}.fusion_point {color:#FFCCAA}#helper {text-align:left;border:1px dotted #fafafa;color:#777777;font-size:12px;}#footer {text-align:left;padding-left:10px;padding-top:20px;color:#777777;font-size:10px;}.exon_left{background:blue;color:white;border:0px;padding:0px;font-size:8px;}.exon_right{background:red;color:white;0px;padding:0px;font-size:8px;}.intron_left{color:blue;0px;padding:0px;font-size:8px;}.intron_right{color:red;0px;padding:0px;font-size:8px;}.protein_table{text-align:center;font-size:8px;}.tips{font-size:10px;padding:5px;color:#666666;text-align:left;}</style></head><body><div id='container'><div class='software'> <a href='https://github.com/OpenGene/GeneFuse' style='text-decoration:none;' target='_blank'>GeneFuse</a> <font size='-1'>0.8.0</font></div><div id='helper'><p>Helpful tips:</p><ul><li> Base color indicates quality: <font color='#78C6B9'>extremely high (Q40+)</font>, <font color='#33BBE2'>high (Q30~Q39) </font>, <font color='#666666'>moderate (Q20~Q29)</font>, <font color='#E99E5B'>low (Q15~Q19)</font>, <font color='#FF0000'>extremely low (0~Q14).</font> </li><li> Move mouse over the base, it will show the quality value</li><li> Click on any row, the original read/pair will be displayed</li><li> For pair-end sequencing, GeneFuse tries to merge each pair, with overlapped assigned higher qualities </li></ul><p>Columns:</p><ul><li> col1: is fusion mapped with original read? → means original read, ← means reverse complement</li><li> col2: edit distance (ed) between read and reference sequence (left_part_ed | right_part_ed)</li><li> col3: read's left part after fusion break</li><li> col4: read's right part after fusion break</li></ul></div><div id='menu'><p>Found 0 fusion:</p><ul></ul></div><div id='footer'> <p>genefuse --read1 samples/R1.fastq --fusion reference_genome/cancer.hg38.csv --ref reference_genome/hg38.fa --html output/genefuse/R2_genefuse_report.html --json output/genefuse/R2_fusions.json </p>GeneFuse 0.8.0, at 2024-07-16      17:14:13 </div></div></body></html>

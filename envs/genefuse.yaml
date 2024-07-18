@@ -1,0 +1,7 @@
+name: genefuse
+channels:
+  - conda-forge
+  - bioconda
+# trim galore nao esta disponivel no conda anymore
+dependencies:
+  - bioconda::genefuse

@@ -1,0 +1,5 @@
+name: interomics_snakemake
+channels:
+  - defaults
+dependencies:
+  - bioconda::snakemake
