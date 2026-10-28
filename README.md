@@ -192,7 +192,7 @@ If you use VKaryo, please cite the archived release:
 
 ```bibtex
 @software{vkaryo_2026,
-  author    = {Assuncao, Bruno Rodrigo},
+  author    = {Assuncao, Bruno Rodrigo and Brand{\~a}o, Lucas Andr{\'e} Cavalcanti and Moura, Ronald Rodrigues},
   title     = {VKaryo: multi-omics virtual karyotyping from RNA-seq and whole-exome sequencing},
   version   = {1.0.0},
   year      = {2026},

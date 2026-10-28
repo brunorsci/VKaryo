@@ -6,6 +6,10 @@ authors:
   - family-names: Assuncao
     given-names: Bruno Rodrigo
     email: brunorodrigoassuncao@gmail.com
+  - family-names: Brandão
+    given-names: Lucas André Cavalcanti
+  - family-names: Moura
+    given-names: Ronald Rodrigues
 repository-code: "https://github.com/brunorsci/VKaryo"
 doi: "10.5281/zenodo.23738369"
 identifiers:
