@@ -1,14 +1,21 @@
 {
-  "title": "VKaryo: an automated workflow for detecting chromosomal alterations in leukaemia from multimodal sequencing data",
+  "title": "VKaryo: multi-omics virtual karyotyping from RNA-seq and whole-exome sequencing",
   "upload_type": "software",
   "license": "MIT",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "creators": [
-    { "name": "Assuncao, Bruno Rodrigo" }
+    {
+      "name": "Assuncao, Bruno Rodrigo"
+    }
   ],
   "keywords": [
-    "leukaemia", "virtual karyotyping", "bioinformatics", "RNA-seq",
-    "whole-exome sequencing", "gene fusion", "copy number variation", "Snakemake"
+    "virtual karyotyping",
+    "bioinformatics",
+    "RNA-seq",
+    "whole-exome sequencing",
+    "gene fusion",
+    "copy number variation",
+    "Snakemake"
   ],
-  "description": "Snakemake workflow integrating total RNA-seq and whole-exome sequencing for the coordinated detection of gene fusions, chromosomal translocations, copy number variations and single-nucleotide variants, with molecular classification and prognostic stratification modules."
+  "description": "Snakemake workflow integrating paired RNA-seq and whole-exome sequencing to detect gene fusions, structural variants, copy number changes and point mutations in one coordinated run and reconcile them into a single virtual karyotype. The detection steps do not depend on the disease under analysis; the classification layer -- driver panel, WHO-HAEM5/ICC entity assignment and risk stratification -- is specific to haematological neoplasms."
 }

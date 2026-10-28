@@ -12,7 +12,8 @@ genome.
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Snakemake](https://img.shields.io/badge/snakemake-%E2%89%A57.0-brightgreen.svg)](https://snakemake.readthedocs.io)
 [![Python](https://img.shields.io/badge/python-%E2%89%A53.9-blue.svg)](https://www.python.org/)
-[![Version](https://img.shields.io/badge/version-0.1.0-informational.svg)](CITATION.cff)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23738369.svg)](https://doi.org/10.5281/zenodo.23738369)
+[![Version](https://img.shields.io/badge/version-1.0.0-informational.svg)](CITATION.cff)
 
 </div>
 
@@ -183,8 +184,26 @@ to put the evidence in front of that person, not to replace them.
 
 ## Citing
 
+If you use VKaryo, please cite the archived release:
+
+> Assuncao, B. R. (2026). *VKaryo: multi-omics virtual karyotyping from RNA-seq
+> and whole-exome sequencing* (v1.0.0). Zenodo.
+> https://doi.org/10.5281/zenodo.23738369
+
+```bibtex
+@software{vkaryo_2026,
+  author    = {Assuncao, Bruno Rodrigo},
+  title     = {VKaryo: multi-omics virtual karyotyping from RNA-seq and whole-exome sequencing},
+  version   = {1.0.0},
+  year      = {2026},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.23738369},
+  url       = {https://doi.org/10.5281/zenodo.23738369}
+}
+```
+
 Validation against a public reference panel of haematological cell lines is
-reported in the accompanying article. Software citation metadata is in
+reported in the accompanying article. Software citation metadata is also in
 [`CITATION.cff`](CITATION.cff).
 
 ## Licence

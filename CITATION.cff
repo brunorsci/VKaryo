@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-title: "VKaryo: an automated workflow for detecting chromosomal alterations in leukaemia from multimodal sequencing data"
+title: "VKaryo: multi-omics virtual karyotyping from RNA-seq and whole-exome sequencing"
 message: "If you use this software, please cite it using these metadata."
 type: software
 authors:
@@ -7,11 +7,15 @@ authors:
     given-names: Bruno Rodrigo
     email: brunorodrigoassuncao@gmail.com
 repository-code: "https://github.com/brunorsci/VKaryo"
+doi: "10.5281/zenodo.23738369"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.23738369"
+    description: "Archived release v1.0.0"
 license: MIT
-version: 0.1.0
+version: 1.0.0
 date-released: "2026-10-28"
 keywords:
-  - leukaemia
   - virtual karyotyping
   - bioinformatics
   - RNA-seq
