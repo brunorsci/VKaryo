@@ -185,10 +185,10 @@ to put the evidence in front of that person, not to replace them.
 ## Citing
 
 If you use VKaryo, please cite the archived release:
+**[10.5281/zenodo.23738369](https://doi.org/10.5281/zenodo.23738369)**
 
-> Assuncao, B. R. (2026). *VKaryo: multi-omics virtual karyotyping from RNA-seq
-> and whole-exome sequencing* (v1.0.0). Zenodo.
-> https://doi.org/10.5281/zenodo.23738369
+<details>
+<summary>BibTeX</summary>
 
 ```bibtex
 @software{vkaryo_2026,
@@ -202,9 +202,10 @@ If you use VKaryo, please cite the archived release:
 }
 ```
 
+</details>
+
 Validation against a public reference panel of haematological cell lines is
-reported in the accompanying article. Software citation metadata is also in
-[`CITATION.cff`](CITATION.cff).
+reported in the accompanying article.
 
 ## Licence
 
