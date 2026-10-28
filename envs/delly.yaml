@@ -1,0 +1,9 @@
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - htslib=1.17
+  - libcurl=7.87.0
+  - libnghttp2=1.47.0
+  - delly=1.1.6

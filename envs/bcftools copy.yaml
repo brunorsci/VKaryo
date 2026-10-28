@@ -1,0 +1,9 @@
+name: bcftools
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+# trim galore nao esta disponivel no conda anymore
+dependencies:
+  - bioconda::bcftools
+  - bioconda::gatk4

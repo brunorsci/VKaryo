@@ -1,0 +1,27 @@
+rule cnvkit_batch:
+    input:
+        bam=config["output"] + "output_vkaryo/recal_apply/{sample}_markduplicates_recal.bam",
+        reference=config["output"] + "output_vkaryo/cnvkit/flat_reference.cnn",
+        targets=config["refgenome"]["exome_bed"]
+    output:
+        cnr=config["output"] + "output_vkaryo/cnvkit/{sample}_markduplicates_recal.cnr",
+        cns=config["output"] + "output_vkaryo/cnvkit/{sample}_markduplicates_recal.cns"
+    params:
+        output_dir=config["output"] + "output_vkaryo/cnvkit/"
+    log:
+        config["output"] + "logs/cnvkit_batch/{sample}.log"
+    conda:
+        "../envs/cnvkit.yaml"
+    threads: 10
+    shell:
+        """
+        # Force conda's libstdc++ over system's (system lacks CXXABI_1.3.15)
+        export LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH
+
+        cnvkit.py batch {input.bam} \
+            -r {input.reference} \
+            --output-dir {params.output_dir} \
+            --processes {threads} \
+            --method hybrid \
+            2>&1 | tee {log}
+        """

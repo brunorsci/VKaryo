@@ -1,0 +1,17 @@
+name: reporting
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - python=3.10
+  - pandas=2.0
+  - numpy=1.24
+  - matplotlib=3.7
+  - plotly=5.14
+  - streamlit=1.28
+  - sqlite=3.42
+  - weasyprint=59
+  - pillow=10.0
+  - jinja2=3.1
+  - openpyxl=3.1

@@ -1,0 +1,11 @@
+name: survivor
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - survivor=1.0.7
+  - bcftools=1.17
+  - htslib=1.17
+  - samtools=1.17
+  - tabix=1.11

@@ -1,0 +1,14 @@
+name: annotsv
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - tqdm=4.64.1
+  - annotsv
+  - bcftools=1.10
+  - htslib=1.10
+  - libdeflate
+  - bedtools
+  - pip

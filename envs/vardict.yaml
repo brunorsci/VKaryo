@@ -1,0 +1,15 @@
+name: vardict
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - vardict-java=1.8.3
+  - bcftools=1.17
+  - htslib=1.17
+  - samtools=1.17
+  - perl=5.32
+  - r-base=4.2
+  - python=3.9
+  - pandas
+  - numpy

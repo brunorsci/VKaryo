@@ -1,0 +1,10 @@
+name: arriba
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - arriba=2.5.0
+  - star=2.7.11b  # Ajuste conforme necessário
+  - samtools=1.17
+  - wget

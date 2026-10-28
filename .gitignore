@@ -1,0 +1,14 @@
+# Reference data is not versioned -- see docs/references.md
+reference/
+test/reference/
+test/reads/
+
+# Run outputs
+results/
+results_example/
+.snakemake/
+logs/
+
+# Python
+__pycache__/
+*.pyc

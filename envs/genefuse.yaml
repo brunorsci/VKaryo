@@ -1,0 +1,7 @@
+name: genefuse
+channels:
+ - bioconda
+ - conda-forge
+ - defaults
+dependencies:
+  - genefuse

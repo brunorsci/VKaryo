@@ -1,0 +1,27 @@
+# Configuration for the worked example in docs/example.md.
+# Every path points inside test/, built by scripts/make_test_dataset.py.
+# Do not use this file for real data: the reference is a single chromosome.
+
+input:
+   exome: test/reads/wes/
+   rnaseq: test/reads/rna/
+
+output: results_example/
+
+refgenome:
+   ref: test/reference/mini.fa
+   gtf: test/reference/mini.gtf
+   star_index: test/reference/star_index/
+   exome_bed: test/reference/targets.bed
+
+DNA: true
+RNA: true
+
+cnv:
+   # Thresholds are the workflow defaults; see rules/cnvFocalEvents.snakefile
+   # for why deep losses are judged by coverage ratio rather than by log2.
+   limiar_homozigotico: 0.05
+   limiar_perda: 0.70
+   limiar_ganho: 1.50
+   min_bins: 3
+   razao_global_minima: 0.30

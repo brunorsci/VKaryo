@@ -1,0 +1,159 @@
+# VKaryo configuration
+#
+# Every path the workflow uses is resolved from this file. Entries marked
+# /PATH/TO/... must be edited before the first run; see docs/references.md
+# for what each reference file is and where to obtain it.
+#
+# To check that every path resolves, without executing anything:
+#   snakemake --configfile config/my_config.yaml --rulegraph > /dev/null
+
+RNA: True                # Necessario para o modulo de estratificacao (fusoes + integracao DNA+RNA) e para Mutect2/ANNOVAR
+DNA: True
+exome: True
+
+# ============================================================
+# Ferramentas opcionais - ativar/desativar conforme necessário
+# ============================================================
+tools:
+   purecn: False         # DESLIGADO: estimativa de pureza tumoral/ploidia -- problema de formato de intervals nao resolvido
+   optitype: False       # DESLIGADO: gera complicacoes no workflow (decisao do usuario)
+   vardict: True         # Necessario para merge_variant_callers -> classify_leukemia
+   arriba: True          # Necessario para classify_leukemia (fusoes patognomonicas)
+   cnv_expression: False # DESLIGADO por padrao: analise de Expressao de CNVs (pacote R CNVExpression)
+                          # so roda quando explicitamente habilitada. Precisa de varias amostras
+                          # DNA+RNA concatenadas (ver rules/cnv_expression.snakefile).
+
+# Parametros da analise de Expressao de CNVs (rules/cnv_expression.snakefile) -- so tem efeito se
+# tools.cnv_expression=True acima.
+cnv_expression:
+   logfc_cutoff: 1        # log fold-change minimo (absoluto) pra considerar um gene significativo
+   pvalue_cutoff: 0.05    # p-valor ajustado maximo
+
+input: # Definir o caminho da pasta com as amostras (sempre coloque '/' ao final quando for o caminho!)
+   exome: "/PATH/TO/exome_fastq/"
+   rnaseq: "/PATH/TO/rnaseq_fastq/"
+output: results/
+#"/home/patgen/hd3/cariotipagem/VKaryo/resultados/"
+
+refgenome:
+   ref_dir: reference/
+   ref: reference/GRCh38_character_genome.fasta
+   gtf: reference/Homo_sapiens.GRCh38.113.gtf.gz
+   index: /home/patgen/hd3/cariotipagem/VKaryo/reference/GRCh38_RSEM_index
+   bed: reference/hg38_no_alt.bed.gz
+   # Capture kit target BED. Must match the kit used for the libraries.
+   linhagem_celular: reference/linhagem_celular_por_amostra.tsv  # imunofenotipo por amostra, entrada da atribuicao de entidade
+   star_index: reference/star_index/  # indice do STAR, construido com docs/references.md
+   exome_bed: reference/Agilent_SureSelect_V6_hg38.bed
+   known_var: reference/dbsnp_156_chr.vcf.gz
+   dict: reference/GRCh38_character_genome.dict
+   genefuse_gene_list: reference/cancer.hg38.csv
+   map: reference/Homo_sapiens.GRCh38.dna.primary_assembly.fa.r101.s501.blacklist.gz
+   gnomad_sv: reference/gnomad.v4.1.sv.sites.vcf.gz
+   annovar_dir: /PATH/TO/EDIT
+   annovar_db: /PATH/TO/EDIT
+   # Mutect2 somatic calling resources
+   gnomad_genome: reference/af-only-gnomad.hg38.vcf.gz
+   panel_of_normals: reference/leukemia_pon.vcf.gz
+   cosmic_heme: reference/cosmic_heme_v99.vcf.gz
+
+threads:
+   bwa: 13
+   fastp: 6
+   mamba: 6
+   annotsv: 6
+
+# Variant calling parameters
+variant_calling:
+   min_vaf: 0.05           # 5% minimum variant allele fraction
+   min_depth: 20           # 20X minimum coverage
+   min_alt_reads: 3        # Minimum alternate reads
+   driver_genes: reference/driver_genes_leukemia.txt
+   driver_genes_bed: reference/driver_genes_exons.bed  # BED de exons de genes drivers para VarDict
+
+# CNV parameters
+cnv:
+   min_log2_ratio_amp: 0.3     # Amplification threshold
+   max_log2_ratio_del: -0.3    # Deletion threshold
+   gene_coords: reference/gene_coords_hg38.tsv
+   # amostra x gene de interesse para o scatter colorido (rules/cnv_scatter.snakefile) --
+      # alteração-chave documentada não entram, nada de gene pra destacar nelas
+   genes_interesse: reference/genes_interesse_por_amostra.tsv
+   # Corte SEPARADO do min_log2_ratio_amp/max_log2_ratio_del acima -- só para o
+   # cariótipo virtual de genoma inteiro (rule cnv_genome_scatter_plot, os 24
+   # cromossomos num grid). Propósito diferente: aquele é achado focal por
+   # gene (CNV pontual, já temos tabela pra isso); este é alteração
+   # ESTRUTURAL/cromossômica (braço inteiro, monossomia, trissomia) -- por
+   # isso o corte é seu próprio parâmetro, não reaproveita o de cima.
+   # Valor pré-definido = regime "germline samples" da própria doc do CNVkit
+   # (cnvlib/call.py, absolute_threshold()) -- mais adequado que o regime
+   # "tumor com contaminação normal" (que assume ~50% célula normal
+      # biópsia. AINDA PRECISA SER VALIDADO contra amostras com cariótipo
+   # anotado (sensibilidade de detecção visual) -- por isso é parâmetro
+   # separado e fácil de ajustar aqui, não hardcoded no script.
+   karyotype_gain_threshold: 0.3
+   karyotype_loss_threshold: -0.4
+
+   # --------------------------------------------------------------------
+   # Eventos focais apoiados em evidencia de cobertura
+   # (rules/cnvFocalEvents.snakefile)
+   # --------------------------------------------------------------------
+   # Existem porque a razao log2 do CNVkit com referencia plana NAO e
+   # quantitativamente valida quando a cobertura tende a zero -- medido no
+      # = -5,0) e o CNVkit reporta -23,4, erro de 18 unidades. Logo a delecao
+   # homozigotica, que e o achado de maior peso clinico, nao pode ser chamada
+   # pelo log2. Estes parametros governam a chamada pela RAZAO DE COBERTURA.
+   #
+   # bin_statistics_file: deixe vazio para o workflow derivar as estatisticas
+   # da propria coorte em execucao, com o kit dessa execucao (rule
+   # cnv_bin_statistics). Aponte para um arquivo gerado antes, com o MESMO
+   # kit de captura, quando for analisar amostra isolada ou coorte menor que
+   # bin_statistics_min_samples -- e o caminho previsto para uso clinico
+   # amostra a amostra. Um arquivo de outro kit tem bins diferentes e daria
+   # cobertura esperada errada.
+   bin_statistics_file:
+   bin_statistics_min_samples: 20
+
+   focal_homozygous_ratio: 0.05      # razao obs/esp abaixo disto: perda homozigotica
+   focal_loss_ratio: 0.70            # entre o anterior e este: perda heterozigotica
+   focal_gain_ratio: 1.50            # acima disto: ganho
+   focal_min_expected_coverage: 5.0  # bins com cobertura esperada menor sao ignorados:
+                                     # ausencia de leituras ali nao informa nada
+   focal_min_bins: 3                 # minimo de bins contiguos para constituir evento
+   focal_max_bin_gap: 100000         # distancia maxima entre bins do mesmo evento, em pb
+   # Guarda de qualidade da amostra. A raridade do bin na coorte NAO protege
+   # contra uma amostra globalmente mal sequenciada: se so ela tem cobertura
+      # (profundidade mediana 2,8x contra ~27x da coorte) produzia 5 "delecoes
+   # homozigoticas" em genes-driver que eram artefato de cobertura. Abaixo
+   # desta razao global a amostra e marcada qc_da_amostra=insuficiente.
+   # --------------------------------------------------------------------
+   # Desequilibrio em nivel de braco (rules/cnvArmLevel.snakefile)
+   # --------------------------------------------------------------------
+   # Cobre o regime HEMIZIGOTICO, que a etapa focal acima nao alcanca: perder
+   # uma de duas copias de um braco nao zera a cobertura, so a reduz pela
+   # metade. Criterio = amplitude + extensao, como em Shukla et al., Nat
+   # Commun 2020 (que inclui linhagens celulares). A fracao exigida varia de
+   # 0,05 a 0,90 entre estudos publicados; 0,50 e valor intermediario e 0,90
+   # reproduz o criterio estrito daquele trabalho.
+   cytobands: reference/arriba/cytobands_hg38_GRCh38_v2.5.0.tsv
+   arm_min_bins: 50
+   arm_loss_threshold: -0.30
+   arm_gain_threshold: 0.25
+   arm_bin_amplitude: 0.20
+   arm_min_fraction: 0.50
+
+   focal_min_sample_global_ratio: 0.30
+   focal_max_cohort_frequency: 0.05  # fracao da coorte abaixo da qual a queda do bin
+                                     # e tida por rara. ATENCAO: queda frequente NAO
+                                     # prova artefato -- delecao recorrente verdadeira
+                                     # (CDKN2A) e recombinacao V(D)J (locus TRA/TRD,
+                                     # IGH) tambem recorrem. A coluna informa, nao decide.
+
+# Consolidação "Parte 1" (rules/consolidate_results.snakefile) -- concatena
+# os resultados de cada programa (Arriba/Manta/DELLY/CNVkit/Mutect2) de
+# todas as amostras num só TSV, filtrado por painel de genes. As duas chaves
+# pode omitir esta seção inteira sem quebrar a consolidação (usa só
+# driver_genes_leukemia.txt como filtro, sem coluna "entity").
+consolidation:
+   extra_gene_panel:   # optional, cohort-specific; leave empty for normal use
+   ground_truth:   # optional: TSV with known-truth entity per sample, for benchmarking only

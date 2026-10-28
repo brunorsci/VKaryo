@@ -1,0 +1,15 @@
+name: purecn
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - r-base=4.2
+  - bioconductor-purecn=2.4.0
+  - bioconductor-dnacopy
+  - bioconductor-variantannotation
+  - r-vgam
+  - r-data.table
+  - samtools
+  - bedtools
+  - icu=58.*  # Required for stringi library

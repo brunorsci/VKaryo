@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+title: "VKaryo: an automated workflow for detecting chromosomal alterations in leukaemia from multimodal sequencing data"
+message: "If you use this software, please cite it using these metadata."
+type: software
+authors:
+  - family-names: Assuncao
+    given-names: Bruno Rodrigo
+    email: brunorodrigoassuncao@gmail.com
+repository-code: "https://github.com/brunorsci/VKaryo0.1"
+license: MIT
+version: 0.1.0
+date-released: "2026-10-28"
+keywords:
+  - leukaemia
+  - virtual karyotyping
+  - bioinformatics
+  - RNA-seq
+  - whole-exome sequencing
+  - gene fusion
+  - copy number variation
+  - Snakemake

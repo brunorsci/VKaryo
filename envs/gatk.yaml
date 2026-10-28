@@ -1,0 +1,12 @@
+name: gatk4
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - bioconda::gatk4=4.4.0.0
+  - bcftools=1.17
+  - htslib=1.17
+  - samtools=1.17
+  - python=3.9
+  - openjdk=17

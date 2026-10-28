@@ -1,0 +1,6 @@
+name: interomics_snakemake
+channels:
+  - defaults
+dependencies:
+  - bioconda::snakemake
+  - python=3.9

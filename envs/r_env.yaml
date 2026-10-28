@@ -1,0 +1,8 @@
+name: r_metrics
+channels:
+  - conda-forge
+dependencies:
+  - r-base
+  - r-tidyverse
+  - r-biocmanager
+  - r-data.table

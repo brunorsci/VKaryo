@@ -1,0 +1,14 @@
+{
+  "title": "VKaryo: an automated workflow for detecting chromosomal alterations in leukaemia from multimodal sequencing data",
+  "upload_type": "software",
+  "license": "MIT",
+  "version": "0.1.0",
+  "creators": [
+    { "name": "Assuncao, Bruno Rodrigo" }
+  ],
+  "keywords": [
+    "leukaemia", "virtual karyotyping", "bioinformatics", "RNA-seq",
+    "whole-exome sequencing", "gene fusion", "copy number variation", "Snakemake"
+  ],
+  "description": "Snakemake workflow integrating total RNA-seq and whole-exome sequencing for the coordinated detection of gene fusions, chromosomal translocations, copy number variations and single-nucleotide variants, with molecular classification and prognostic stratification modules."
+}

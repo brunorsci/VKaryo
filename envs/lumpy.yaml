@@ -1,0 +1,6 @@
+name: lumpy
+channels:
+  - bioconda
+  - conda-forge
+dependencies:
+  - lumpy-sv

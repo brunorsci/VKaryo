@@ -1,0 +1,12 @@
+name: annovar
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - perl=5.32
+  - perl-dbi
+  - perl-dbd-mysql
+  - bcftools=1.17
+  - htslib=1.17
+  - tabix=1.11
