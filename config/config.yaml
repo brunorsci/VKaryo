@@ -47,7 +47,6 @@ refgenome:
    exome_bed: reference/Agilent_SureSelect_V6_hg38.bed
    known_var: reference/dbsnp_156_chr.vcf.gz
    dict: reference/GRCh38_character_genome.dict
-   genefuse_gene_list: reference/cancer.hg38.csv
    map: reference/Homo_sapiens.GRCh38.dna.primary_assembly.fa.r101.s501.blacklist.gz
    gnomad_sv: reference/gnomad.v4.1.sv.sites.vcf.gz
    annovar_dir: /PATH/TO/EDIT

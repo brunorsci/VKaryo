@@ -3,7 +3,7 @@ VKaryo - Virtual Karyotyping Workflow for Leukemia
 ====================================================
 
 Comprehensive genomic analysis pipeline for leukemia samples combining:
-- RNA-seq: Fusion detection (Arriba, GeneFuse) + Gene expression
+- RNA-seq: Fusion detection (Arriba) + Gene expression
 - WES: SNV/Indel calling (Mutect2 + VarDict), CNV detection, SV calling
 
 WORKFLOW STRUCTURE:
@@ -14,7 +14,7 @@ WORKFLOW STRUCTURE:
 
 2. Variant Detection
    - SNVs/Indels: Mutect2 (primary) + VarDict (MRD)
-   - Fusions: Arriba + GeneFuse
+   - Fusions: Arriba
    - SVs: MANTA + DELLY → SURVIVOR consensus
    - CNVs: CNVkit + PureCN
 
@@ -204,9 +204,6 @@ if config.get("tools", {}).get("cnv_expression", False) and config.get("RNA", Fa
     ]
 
 RNA_OUTPUTS = [
-        ### FASTP ###
-
-        ### GENEFUSE ###
 
         ### STAR ALIGN ###
         expand(config["output"] + "output_vkaryo/star_aligned/{sample}_Aligned.sortedByCoord.out.bam", sample=SAMPLES_RNA),

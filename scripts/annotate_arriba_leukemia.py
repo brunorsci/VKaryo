@@ -392,7 +392,7 @@ LEUKEMIA_FUSIONS = {
 }
 
 # Genes cujo parceiro de fusão é o lócus de imunoglobulina (IGH/IGK/IGL) ou um
-# gene "proxy" adjacente frequentemente usado por Arriba/GeneFuse em vez do
+# gene "proxy" adjacente frequentemente usado por Arriba em vez do
 # nome literal do segmento de Ig (ex: CASC11/PVT1 ficam ao lado de MYC,
 # MYEOV/ELK2AP ao lado de CCND1). Mapeia gene-alvo -> chave em LEUKEMIA_FUSIONS.
 IG_PARTNER_PROXY = {
