@@ -116,8 +116,8 @@ VKaryo keeps flagged calls in the annotated output with the flag recorded.
 ## Quick start
 
 ```bash
-git clone https://github.com/brunorsci/VKaryo0.1.git
-cd VKaryo0.1
+git clone https://github.com/brunorsci/VKaryo.git
+cd VKaryo
 conda env create -f envs/vkaryo.yaml && conda activate vkaryo
 
 # reference files: see docs/references.md
