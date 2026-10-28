@@ -11,8 +11,9 @@ cancer and non-cancer samples alike. The classification modules are specific
 to haematological neoplasms.
 
 > **Status.** This is release `v0.1.0`, the version accompanying the
-> manuscript. The local web interface is not part of this release and is
-> planned for a later version.
+> manuscript. The local web interface is not part of this release but is
+> available upon request from the corresponding author and is planned for
+> inclusion in a future version.
 
 ## What it does
 
