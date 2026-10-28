@@ -1,0 +1,22 @@
+# Top-level environment: Snakemake itself and the few utilities the workflow
+# calls outside a rule. Everything each rule needs is declared in its own file
+# in this directory and installed by Snakemake with --use-conda, so there is
+# no need to install the analysis tools by hand.
+name: vkaryo
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - snakemake=8.16
+  - python>=3.11
+  - conda
+  - mamba
+  - pandas
+  - numpy
+  - matplotlib
+  - bedtools
+  - samtools
+  - graphviz        # for snakemake --rulegraph | dot
+  - zlib
+  - boost=1.85

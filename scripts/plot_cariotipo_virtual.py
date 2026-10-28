@@ -241,7 +241,7 @@ def main():
                    and (args.incluir_sexuais or c not in ('chrX', 'chrY'))]
     pontos, autossomicas = razoes(args.cnr, est, cromossomos, fora)
     if not autossomicas:
-        sys.exit('ERRO: nenhuma janela autossomica utilizavel')
+        sys.exit('ERROR: no usable autosomal window')
     base = statistics.median(autossomicas)
 
     med = medianas_por_janela(pontos, args.janela_mb, args.min_janelas_balde)
@@ -280,11 +280,11 @@ def main():
     ax.set_ylim(-args.ylim, args.ylim)
     ax.set_xticks([m[0] for m in marcas])
     ax.set_xticklabels([m[1] for m in marcas], fontsize=8)
-    ax.set_ylabel('Log$_2$ (observado / esperado)', fontsize=10)
+    ax.set_ylabel('Log$_2$ (observed / expected)', fontsize=10)
     ax.set_title(f"{args.titulo or args.sample}    "
-                 f"[janela {args.janela_mb:g} Mb, DLRS {disp:.3f}, "
-                 f"ganho de uma copia = {0.585 / disp:.1f}x a dispersao"
-                 + ('; bracos curtos acrocentricos excluidos]' if fora else ']'),
+                 f"[{args.janela_mb:g} Mb windows, DLRS {disp:.3f}, "
+                 f"one-copy gain = {0.585 / disp:.1f}x the spread"
+                 + ('; acrocentric short arms excluded]' if fora else ']'),
                  fontsize=10, fontweight='bold')
     for s in ('top', 'right'):
         ax.spines[s].set_visible(False)
@@ -322,10 +322,10 @@ def main():
                     va='center', color='#7f8c8d')
         a2.set_xlim(0, tam[c] / 1e6)
         a2.set_ylim(-args.ylim, args.ylim)
-        a2.set_xlabel('Posicao (Mb)', fontsize=10)
-        a2.set_ylabel('Log$_2$ (observado / esperado)', fontsize=10)
+        a2.set_xlabel('Position (Mb)', fontsize=10)
+        a2.set_ylabel('Log$_2$ (observed / expected)', fontsize=10)
         a2.set_title(f"{args.titulo or args.sample} — {c}   "
-                     f"[janela {jw:g} Mb, DLRS do genoma {disp:.3f}]",
+                     f"[{jw:g} Mb windows, genome DLRS {disp:.3f}]",
                      fontsize=11, fontweight='bold')
         for sp in ('top', 'right'):
             a2.spines[sp].set_visible(False)
