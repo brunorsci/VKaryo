@@ -12,11 +12,21 @@ on a laptop.
 
 ## What is planted
 
-| Event | Where | Expected call |
+Two samples are generated. **`sample1` carries both events; `sample2` carries
+neither and acts as the control.**
+
+| Event | Sample | Expected call |
 |---|---|---|
-| Gene fusion | breakpoint joining two genes on the mini reference | reported by Arriba with supporting reads |
-| Homozygous deletion | a ~100 kb interval with zero coverage | reported by `cnv_focal_events` as homozygous loss |
-| Neutral region | the rest of the chromosome | no event |
+| Gene fusion `GENEA--GENEB` | sample1 | reported by Arriba with supporting reads |
+| Homozygous deletion, ~100 kb | sample1 | reported by `cnv_focal_events` as homozygous loss |
+| Neutral genome | both | no event |
+
+The control matters and is not decoration. Focal events are called by
+comparing a sample's coverage against the coverage expected from the cohort,
+so at least one sample must be **covered** at that locus for the expectation
+to be non-zero. If every sample carried the deletion, the region would simply
+look like one where no coverage is expected, and the event would vanish by
+construction.
 
 ## Building the test data
 

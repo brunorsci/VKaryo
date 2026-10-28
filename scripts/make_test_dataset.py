@@ -81,15 +81,22 @@ def par(rng, seq, pos, nome, qual='I'):
     return (f'@{nome}/1\n{r1}\n+\n{q}\n', f'@{nome}/2\n{r2}\n+\n{q}\n')
 
 
-def gerar(seq, rng, alvos, com_fusao):
-    """Devolve (linhas_r1, linhas_r2). Pula fragmentos dentro da delecao."""
+def gerar(seq, rng, alvos, com_fusao, com_delecao):
+    """Devolve (linhas_r1, linhas_r2).
+
+    So a amostra com a delecao plantada tem seus fragmentos suprimidos no
+    intervalo: a deteccao focal compara a cobertura observada com a esperada
+    derivada da coorte, de modo que e preciso haver amostra COBERTA naquele
+    lócus para que a esperada nao seja zero. Com todas as amostras deletadas o
+    evento desapareceria por construcao.
+    """
     r1s, r2s = [], []
     n = 0
     for ini, fim in alvos:
         quantos = max(1, (fim - ini) * COBERTURA // (LEITURA * 2))
         for _ in range(quantos):
             pos = rng.randint(ini, max(ini, fim - INSERTO))
-            if na_delecao(pos) or na_delecao(pos + INSERTO):
+            if com_delecao and (na_delecao(pos) or na_delecao(pos + INSERTO)):
                 continue
             a, b = par(rng, seq, pos, f'read{n}')
             r1s.append(a); r2s.append(b); n += 1
@@ -131,9 +138,11 @@ def main():
     alvos = [(g[1], g[2]) for g in GENES]
     alvos += [(i, i + 2_000) for i in range(100_000, TAMANHO - 100_000, 50_000)]
 
-    for amostra, fusao in (('sample1', True), ('sample2', False)):
+    # sample1 carrega os dois eventos; sample2 e o controle, sem nenhum.
+    for amostra, fusao, delecao in (('sample1', True, True), ('sample2', False, False)):
         for ramo in ('wes', 'rna'):
-            r1, r2 = gerar(seq, random.Random(args.seed), alvos, fusao and ramo == 'rna')
+            r1, r2 = gerar(seq, random.Random(args.seed), alvos,
+                           fusao and ramo == 'rna', delecao)
             escrever_fastq(os.path.join(args.outdir, 'reads', ramo, f'{amostra}_1.fastq.gz'), r1)
             escrever_fastq(os.path.join(args.outdir, 'reads', ramo, f'{amostra}_2.fastq.gz'), r2)
 
@@ -143,7 +152,6 @@ def main():
         fh.write('sample\ttype\tchrom\tstart\tend\tdetail\n')
         fh.write(f'sample1\tfusion\t{CHROM}\t-\t-\t{FUSAO[0]}--{FUSAO[1]}\n')
         fh.write(f'sample1\thomozygous_loss\t{CHROM}\t{DELECAO[0]}\t{DELECAO[1]}\tDELGENE\n')
-        fh.write(f'sample2\thomozygous_loss\t{CHROM}\t{DELECAO[0]}\t{DELECAO[1]}\tDELGENE\n')
 
     print(f'test dataset written to {args.outdir}/')
     print('next: build the mini indexes, as described in docs/example.md')
