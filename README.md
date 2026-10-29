@@ -19,7 +19,7 @@ genome.
 
 ---
 
-> **Status.** This is release `v0.1.0`, the version accompanying the
+> **Status.** This is release `v1.0.0`, the version accompanying the
 > manuscript. The local web interface is not part of this release but is
 > available upon request from the corresponding author and is planned for
 > inclusion in a future version.
@@ -178,8 +178,9 @@ Two scripts support the comparison reported in the accompanying article:
 
 | Script | Purpose |
 |---|---|
-| `scripts/confrontar_cariotipo_bandas.py` | scores each dosage alteration of an ISCN karyotype against the coverage profile, in three layers: concordant, concordant with refinement, not reproduced |
-| `scripts/controle_bloco_espurio.py` | applies the same rule to arms the karyotype does **not** declare altered, giving the spurious-block rate |
+| `validacao_dsmz/confrontar_cariotipo_bandas.py` | scores each dosage alteration of an ISCN karyotype against the coverage profile, in three layers: concordant, concordant with refinement, not reproduced |
+| `validacao_dsmz/controle_bloco_espurio.py` | applies the same rule to arms the karyotype does **not** declare altered, giving the spurious-block rate |
+| `validacao_dsmz/figura3_validacao_dsmz.py` | renders Figure 3 of the article: study design, recovery against spurious-block rate, and the distribution of cell lines by proportion recovered |
 
 The second is not optional. A recovery rate without its background is not
 interpretable: a rule permissive enough to find a block anywhere would report
