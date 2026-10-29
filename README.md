@@ -172,6 +172,20 @@ to put the evidence in front of that person, not to replace them.
 
 ---
 
+## Validation against banded karyotypes
+
+Two scripts support the comparison reported in the accompanying article:
+
+| Script | Purpose |
+|---|---|
+| `scripts/confrontar_cariotipo_bandas.py` | scores each dosage alteration of an ISCN karyotype against the coverage profile, in three layers: concordant, concordant with refinement, not reproduced |
+| `scripts/controle_bloco_espurio.py` | applies the same rule to arms the karyotype does **not** declare altered, giving the spurious-block rate |
+
+The second is not optional. A recovery rate without its background is not
+interpretable: a rule permissive enough to find a block anywhere would report
+high recovery and mean nothing. Paths are taken from the environment
+(`VKARYO_REFERENCE`, `VKARYO_OUTPUT`, `VKARYO_KARYOTYPES`).
+
 ## Documentation
 
 | | |
